@@ -11,19 +11,22 @@
 int main()
 {
     using namespace std;
-    // Note that time taken is run in  in Debug mode and in a single thread.
-    //BubbleSort sorter;   // 4393ms for 10000 elements
+    // Note that time taken is run in Debug mode and in a single thread.
+    //BubbleSort sorter;      // 4393ms for 10000 elements
     //MergeSort  sorter;      // 88ms for 10000 elements
-    //QuickSort  sorter;      // 13 ms for 10000 elements.  47ms for 30000 elements.
-    //InsertionSort  sorter;      // 1394 ms for 10000 elements
-    RadixSort sorter;         // 18ms for 10000 elements.  53ms for 30000 elements when digit base is 16. 36ms for 30000 elements when digit base is 256. 
+    //QuickSort  sorter;      // 13 ms for 10000 elements.  
+                              // 47ms for 30000 elements.
+    //InsertionSort  sorter;  // 1394 ms for 10000 elements
+    RadixSort sorter;         // 18ms for 10000 elements.  
+                              // 53ms for 30000 elements when digit base is 16. 
+                              // 36ms for 30000 elements when digit base is 256. 
 
     sorter.show();
 
     cout << "RAND_MAX= " << RAND_MAX << endl << endl;;
     //cout << sorter2.maxKeySize << endl;
 
-    auto v = vint{ 64*300+35, 5,32,88,99,1088, 1204+256+3, 67,3,16,275,4,1,17,307 };
+    auto v = vint{ 64*300+35, 5,32, 1024, 2048, 256,88,99,1088, 1204+256+3, 67,3,16,275,4,1,17,307 };
     cout << "input=  ";
     for_each(v.begin(), v.end(), [](auto x) {cout << x << ","; });
     cout << endl << "output= ";
@@ -159,7 +162,6 @@ void RadixSort::mysort(vint& list) {
         oldbins[GET_DIGIT0(x)].push_back(x);
     }
 
-#if 1
     for (unsigned int n = 1; n < maxKeySize; n++) {
         for (int i = 0; i < DIGIT_BINS; i++) {
             for (unsigned int j = 0; j < oldbins[i].size(); j++) {
@@ -176,7 +178,6 @@ void RadixSort::mysort(vint& list) {
             list.push_back(oldbins[i][j]);
         }
     }
-#endif
     return;
 }
 
